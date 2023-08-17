@@ -1,0 +1,5 @@
+dist
+
+# do not apply prettier for test directory
+# to prevent "Cannot access before initialization" error
+test
