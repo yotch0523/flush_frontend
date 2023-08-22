@@ -90,7 +90,6 @@ module.exports = {
     '@typescript-eslint/restrict-template-expressions': 0,
     '@typescript-eslint/unbound-method': 1, // Should be fixed
     '@typescript-eslint/require-await': 1, // Should be fixed
-    '@typescript-eslint/no-duplicate-imports': ['error'],
     'no-relative-import-paths/no-relative-import-paths': [
       2,
       {
