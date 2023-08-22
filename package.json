@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "nodemon --watch ./dist --inspect=0.0.0.0:5858 --nolazy ./dist/src/index.js",
+    "dev": "next dev",
     "lint": "eslint -c .eslintrc.js --ext .ts,.tsx src --quiet",
     "format": "prettier . -w",
     "start": "next start",
@@ -14,10 +14,15 @@
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@typescript-eslint/parser": "^6.4.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-no-relative-import-paths": "^1.5.2",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-prettier": "^5.0.0",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.2"
   },
   "dependencies": {
+    "@azure/msal-browser": "^3.0.2",
+    "@azure/msal-react": "^2.0.2",
     "@ianvs/prettier-plugin-sort-imports": "^4.1.0",
     "@types/node": "20.5.0",
     "@types/react": "18.2.20",

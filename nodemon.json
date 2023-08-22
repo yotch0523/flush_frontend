@@ -1,6 +1,6 @@
 {
-  "watch": ["src"],
-  "ignore": ["src/**/*.test.ts"],
-  "ext": "ts,js",
-  "exec": "etsc && cp -r src/config/locales dist/src/config/ && cp -r src/templates dist/src && TS_NODE_BASEURL=./dist node -r tsconfig-paths/register"
+  "watch": ["server"],
+  "exec": "etsc && TS_NODE_BASEURL=./dist node -r tsconfig-paths/register dist/server/index.js",
+  "ext": "ts",
+  "legacyWatch": true
 }

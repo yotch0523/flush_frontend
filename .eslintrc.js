@@ -1,32 +1,53 @@
 module.exports = {
   env: {
-    es2021: true,
+    browser: true,
+    es6: true,
     node: true,
   },
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
+  extends: [
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'next',
+    'plugin:prettier/recommended',
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 12,
+    createDefaultProgram: true,
+    project: './tsconfig.json',
     sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
-  plugins: [
-    'eslint-plugin-import',
-    'eslint-plugin-jsdoc',
-    'eslint-plugin-prefer-arrow',
-    '@typescript-eslint',
-    'no-relative-import-paths',
-    'prettier',
-  ],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+  plugins: ['eslint-plugin-prefer-arrow', '@typescript-eslint', 'no-relative-import-paths'],
   rules: {
-    '@typescript-eslint/ban-types': 0,
-    '@typescript-eslint/no-inferrable-types': 0,
-    '@typescript-eslint/no-var-requires': 0,
-    '@typescript-eslint/no-this-alias': 0,
-    'no-extra-boolean-cast': 0,
-    'no-prototype-builtins': 0,
-    'no-useless-catch': 0,
-    'no-useless-escape': 0,
-    'prefer-const': 0,
+    'react/prop-types': 0,
+    'react/react-in-jsx-scope': 0,
+    'comma-dangle': ['error', 'always-multiline'],
+    'jsx-quotes': ['error', 'prefer-single'],
+    'react-native/no-inline-styles': 0,
+    'space-before-function-paren': 0,
+    'react-hooks/exhaustive-deps': 0,
+    'no-duplicate-imports': 'off',
+    'react/display-name': 0,
+    'prettier/prettier': 0,
+    camelcase: 0,
+    'max-len': [
+      1,
+      {
+        code: 120,
+      },
+    ],
+    'no-use-before-define': 0,
+    'default-param-last': 0,
+    'multiline-ternary': 0,
+    'key-spacing': ['error'],
+    'object-curly-spacing': ['error', 'always'],
     semi: ['error', 'never'],
     'no-multiple-empty-lines': [
       'error',
@@ -44,6 +65,32 @@ module.exports = {
         allowTemplateLiterals: true,
       },
     ],
+    '@typescript-eslint/explicit-function-return-type': 0,
+    '@typescript-eslint/explicit-member-accessibility': 0,
+    '@typescript-eslint/indent': 0,
+    '@typescript-eslint/member-delimiter-style': 0,
+    '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/no-use-before-define': 0,
+    '@typescript-eslint/no-unused-vars': [
+      2,
+      {
+        argsIgnorePattern: '^_',
+      },
+    ],
+    '@typescript-eslint/explicit-module-boundary-types': 0,
+    '@typescript-eslint/no-empty-interface': 1, // Should be fixed
+    '@typescript-eslint/no-unsafe-member-access': 0,
+    '@typescript-eslint/no-unsafe-call': 0,
+    '@typescript-eslint/no-floating-promises': 1, // Should be fixed
+    '@typescript-eslint/no-unsafe-assignment': 0,
+    '@typescript-eslint/no-misused-promises': 1, // Should be fixed
+    '@typescript-eslint/no-unsafe-return': 0,
+    '@typescript-eslint/prefer-regexp-exec': 1, // Should be fixed
+    '@typescript-eslint/restrict-template-expressions': 0,
+    '@typescript-eslint/unbound-method': 1, // Should be fixed
+    '@typescript-eslint/require-await': 1, // Should be fixed
+    '@typescript-eslint/no-duplicate-imports': ['error'],
     'no-relative-import-paths/no-relative-import-paths': [
       2,
       {
