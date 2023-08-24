@@ -6,7 +6,7 @@ import { msalConfig } from '~/services/auth/config'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const instance = new PublicClientApplication(msalConfig)
-  console.info('env :', process.env.NEXT_PUBLIC_SUSI_AUTHORITY)
+
   return (
     <MsalProvider instance={instance}>
       <Header />
