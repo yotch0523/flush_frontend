@@ -34,6 +34,13 @@ jobs:
           app_build_command: 'yarn build'
           api_build_command: 'rm -rf ./node_modules/@next/swc-* && rm -rf ./.next/cache'
           ###### End of Repository/Build Configurations ######
+        env:
+          NEXT_PUBLIC_APP_CLIENTID: ${{ secrets.AZURE_ACTIVE_DIRECTORY_B2C_FLUSH_CLIENT_ID }}
+          NEXT_PUBLIC_SUSI_AUTHORITY: https://stgflush.b2clogin.com/stgflush.onmicrosoft.com/B2C_1_susi
+          NEXT_PUBLIC_EDIT_PROFILE_AUTHORITY: https://stgflush.b2clogin.com/stgflush.onmicrosoft.com/B2C_1_edit_profile
+          NEXT_PUBLIC_AUTHORITY_DOMAIN: stgflush.b2clogin.com
+          NEXT_PUBLIC_API: https://stgflush.onmicrosoft.com/tasks-api
+          NEXT_PUBLIC_API_BASE_URL: https://stg-flush.azurewebsites.net
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
