@@ -33,6 +33,7 @@ jobs:
           package_install_command: 'yarn'
           app_build_command: 'yarn build'
           api_build_command: 'rm -rf ./node_modules/@next/swc-* && rm -rf ./.next/cache'
+          config_file_location: '/swa.config/staging/'
           ###### End of Repository/Build Configurations ######
         env:
           NEXT_PUBLIC_APP_CLIENTID: ${{ secrets.AZURE_ACTIVE_DIRECTORY_B2C_FLUSH_CLIENT_ID }}
