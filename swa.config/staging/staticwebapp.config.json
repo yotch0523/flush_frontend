@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
+  "auth": {
+    "identityProviders": {
+      "customOpenIdConnectProviders": {
+        "b2c": {
+          "registration": {
+            "clientIdSettingName": "AAD_B2C_ClIENT_ID",
+            "clientCredential": {
+              "clientSecretSettingName": "AAD_B2C_ClIENT_SECRET"
+            },
+            "openIdConnectConfiguration": {
+              "wellKnownOpenIdConfiguration": "https://stgflush.b2clogin.com/stgflush.onmicrosoft.com/B2C_1_susi"
+            }
+          },
+          "login": {
+            "nameClaimType": "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name",
+            "scopes": ["openid", "profile"]
+          }
+        }
+      }
+    }
+  },
+  "routes": [
+    {
+      "route": "/login",
+      "redirect": "/.auth/login/b2c"
+    },
+    {
+      "route": "/logout",
+      "redirect": "/.auth/logout?post_logout_redirect_uri=%2Flogout-b2c"
+    },
+    {
+      "route": "/logout-b2c",
+      "redirect": "https%3A%2F%2Fstgflush.b2clogin.com%2Fstgflush.onmicrosoft.com%2Fb2c_1_susi%2Foauth2%2Fv2.0%2Flogout?post_logout_redirect_uri=https%3A%2F%2Fstg-flush.yotch.dev%2Flogin"
+    },
+    {
+      "route": "/*",
+      "allowedRoles": ["authenticated"]
+    }
+  ],
+  "responseOverrides": {
+    "401": {
+      "statusCode": 302,
+      "redirect": "/login"
+    }
+  },
+  "platform": {
+    "apiRuntime": "node:18"
+  },
+  "networking": {
+    "allowedIpRanges": ["126.23.223.98/32"]
+  }
+}
