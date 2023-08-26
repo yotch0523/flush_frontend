@@ -1,18 +1,26 @@
-import { PublicClientApplication } from '@azure/msal-browser'
-import { MsalProvider } from '@azure/msal-react'
+import { InteractionType, PublicClientApplication } from '@azure/msal-browser'
+import { MsalAuthenticationTemplate, MsalProvider } from '@azure/msal-react'
 import type { AppProps } from 'next/app'
 import Header from '~/components/Header'
-import { msalConfig } from '~/services/auth/config'
+import AuthProvider from '~/providers/auth'
+import { loginRequest, msalConfig } from '~/services/auth/config'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const instance = new PublicClientApplication(msalConfig)
+  const authRequest = {
+    ...loginRequest,
+  }
 
   return (
     <MsalProvider instance={instance}>
-      <Header />
-      <div>
-        <Component {...pageProps} />
-      </div>
+      <AuthProvider>
+        <MsalAuthenticationTemplate interactionType={InteractionType.Redirect} authenticationRequest={authRequest}>
+          <Header />
+          <div>
+            <Component {...pageProps} />
+          </div>
+        </MsalAuthenticationTemplate>
+      </AuthProvider>
     </MsalProvider>
   )
 }
