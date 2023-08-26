@@ -27,12 +27,6 @@
       "allowedRoles": ["authenticated"]
     }
   ],
-  "responseOverrides": {
-    "401": {
-      "statusCode": 302,
-      "redirect": "/login"
-    }
-  },
   "platform": {
     "apiRuntime": "node:18"
   },
