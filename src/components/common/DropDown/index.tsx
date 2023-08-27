@@ -15,7 +15,7 @@ const MenuList = (menus: menu[]) => {
   return (
     <ul>
       {menus.map((menu) => (
-        <Menu label={menu.label} pathname={menu.pathname} onClick={menu.onClick} />
+        <Menu key={menu.label} label={menu.label} pathname={menu.pathname} onClick={menu.onClick} />
       ))}
     </ul>
   )
