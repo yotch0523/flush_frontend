@@ -17,8 +17,8 @@ const Header = () => {
     setUser(u)
   }, [])
 
-  const logout = () => {
-    instance.logout()
+  const logout = async () => {
+    await instance.logout()
   }
 
   const menus = [
