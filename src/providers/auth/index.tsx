@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import { User } from '~/types/user'
+import { IUser } from '~/models/user'
 
 const AuthContext = React.createContext(
   {} as {
-    user: User | null | undefined
-    updateUser: (user: User) => void
+    user: IUser | null | undefined
+    updateUser: (user: IUser) => void
   },
 )
 
 const AuthProvider = ({ children }: any) => {
-  const [user, setUser] = useState<User | null | undefined>(null)
-  const updateUser = (user: User) => {
+  const [user, setUser] = useState<IUser | null | undefined>(null)
+  const updateUser = (user: IUser) => {
     setUser(user)
   }
   return <AuthContext.Provider value={{ user, updateUser }}>{children}</AuthContext.Provider>
