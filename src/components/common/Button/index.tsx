@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 type Props = {
   label: string
-  onClick: () => void
+  onClick: (event: Event) => void
   height?: string
   color?: string
 }
@@ -15,7 +15,7 @@ const Button = ({ label, onClick, height, color }: Props) => {
   )
 }
 
-const CustomButton = styled.button<{ onClick: () => void; height?: string; color?: string }>`
+const CustomButton = styled.button<{ onClick: (event: Event) => void; height?: string; color?: string }>`
   border: none;
   background: transparent;
   ${({ height }) => `height: ${height ?? 'initial'}`};

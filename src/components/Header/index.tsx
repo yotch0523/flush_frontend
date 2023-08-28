@@ -26,14 +26,21 @@ const Header = () => {
       label: 'ログアウト',
       onClick: logout,
     },
+    {
+      label: 'ダミー',
+      onClick: () => {},
+    },
   ]
 
   return (
     <MyHeader>
-      <SideBarCollapseButton href='#'>
+      <SideBarCollapseButton>
         <GiHamburgerMenu />
       </SideBarCollapseButton>
-      <DropDown label={getFullName(user) ?? ''} height={height} color='#fff' menus={menus} />
+
+      <DropDown height={height} color='#fff' menus={menus}>
+        {getFullName(user) ?? ''}
+      </DropDown>
     </MyHeader>
   )
 }
