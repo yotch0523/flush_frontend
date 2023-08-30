@@ -1,5 +1,11 @@
 export const ui = {
   font: {
-    color: '#333',
+    baseColor: '#333',
+  },
+  backgroundColor: {
+    main: '#1c1c1c',
+  },
+  color: {
+    white: '#fff',
   },
 }
