@@ -3,7 +3,9 @@ import { MsalAuthenticationTemplate, MsalProvider } from '@azure/msal-react'
 import type { AppProps } from 'next/app'
 import { createGlobalStyle } from 'styled-components'
 import Header from '~/components/Header'
+import Sidebar from '~/components/Sidebar'
 import { ui } from '~/consts/ui'
+import AppContextProvider from '~/providers/app'
 import AuthProvider from '~/providers/auth'
 import { loginRequest, msalConfig } from '~/services/auth/config'
 
@@ -16,11 +18,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <MsalProvider instance={instance}>
       <AuthProvider>
-        <MsalAuthenticationTemplate interactionType={InteractionType.Redirect} authenticationRequest={authRequest}>
-          <GlobalStyle />
-          <Header />
-          <Component {...pageProps} />
-        </MsalAuthenticationTemplate>
+        <AppContextProvider>
+          <MsalAuthenticationTemplate interactionType={InteractionType.Redirect} authenticationRequest={authRequest}>
+            <GlobalStyle />
+            <Component {...pageProps} />
+            <Sidebar backgroundColor={ui.backgroundColor.main} color={ui.color.white} />
+            <Header />
+          </MsalAuthenticationTemplate>
+        </AppContextProvider>
       </AuthProvider>
     </MsalProvider>
   )
@@ -28,7 +33,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
 const GlobalStyle = createGlobalStyle`
   * {
-    color: ${ui.font.color};
+    color: ${ui.font.baseColor};
   }
 
   body {
