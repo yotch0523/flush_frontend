@@ -65,9 +65,9 @@ const DropDown = ({ children, height, backgroundColor, color, menus }: Props) =>
   return (
     <ToggleContainer
       height={height}
-      onBlur={() => {
-        setIsActive(false)
-      }}
+      // onBlur={() => {
+      //   setIsActive(false)
+      // }}
     >
       <ButtonAnchor
         href='#'
