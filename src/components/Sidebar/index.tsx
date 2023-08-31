@@ -1,32 +1,12 @@
 import { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import Menu from '~/components/common/Menu'
+import Links from '~/components/Sidebar/Links'
 import { AppContext, AppContextType } from '~/providers/app'
-import { menu } from '~/types/menu'
 
 type Props = {
   backgroundColor?: string
   color?: string
 }
-
-const menus: menu[] = [
-  {
-    label: 'dummy1',
-    pathname: '#',
-  },
-  {
-    label: 'dummy2',
-    pathname: '#',
-  },
-  {
-    label: 'dummy3',
-    pathname: '#',
-  },
-  {
-    label: 'dummy4',
-    pathname: '#',
-  },
-]
 
 const Sidebar = ({ backgroundColor, color }: Props) => {
   const [isActive, setIsActive] = useState<boolean>()
@@ -43,9 +23,7 @@ const Sidebar = ({ backgroundColor, color }: Props) => {
   if (isActive) {
     return (
       <Nav backgroundColor={backgroundColor}>
-        {menus.map((menu, index) => (
-          <Menu key={`sidebar-menu-${index}`} color={color} label={menu.label} pathname={menu.pathname} />
-        ))}
+        <Links backgroundColor={backgroundColor} color={color} />
       </Nav>
     )
   } else {
