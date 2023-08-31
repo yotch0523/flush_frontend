@@ -31,6 +31,7 @@ const Sidebar = ({ backgroundColor, color }: Props) => {
   }
 }
 
+// style
 const Nav = styled.nav<{ backgroundColor?: string }>`
   padding-top: 40px;
   height: 100%;
