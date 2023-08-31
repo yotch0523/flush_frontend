@@ -1,10 +1,10 @@
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser'
 import { MsalAuthenticationTemplate, MsalProvider } from '@azure/msal-react'
 import type { AppProps } from 'next/app'
-import { createGlobalStyle } from 'styled-components'
 import Header from '~/components/Header'
 import Sidebar from '~/components/Sidebar'
 import { ui } from '~/consts/ui'
+import GlobalStyle from '~/globalStyles'
 import AppContextProvider from '~/providers/app'
 import AuthProvider from '~/providers/auth'
 import { loginRequest, msalConfig } from '~/services/auth/config'
@@ -30,30 +30,5 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     </MsalProvider>
   )
 }
-
-const GlobalStyle = createGlobalStyle`
-  * {
-    color: ${ui.font.baseColor};
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-  }
-
-  a {
-    cursor: pointer;
-    text-decoration: none;
-  }
-
-  ul {
-    margin: 0;
-    padding-left: 0;
-  }
-
-  li {
-    list-style: none;
-  }
-`
 
 export default MyApp
