@@ -23,7 +23,7 @@ enum IconType {
   History = 'history',
 }
 
-const renderIcon = (icon: IconType, color?: string) => {
+const renderIcon = (icon: IconType) => {
   switch (icon) {
     case IconType.Card:
       return <CgCardHearts />
@@ -36,7 +36,7 @@ const renderIcon = (icon: IconType, color?: string) => {
   }
 }
 
-const links = {
+const links: { [key: string]: Link[] } = {
   contents: [
     {
       label: 'カード管理',
@@ -90,7 +90,7 @@ const Links = ({ backgroundColor, color }: Props) => {
                   return (
                     <li key={`menu-link-${i}`}>
                       <Link href={href}>
-                        {renderIcon(icon, color)}
+                        {renderIcon(icon)}
                         <span>{label}</span>
                       </Link>
                     </li>
