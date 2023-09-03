@@ -1,9 +1,9 @@
 import { createGlobalStyle } from 'styled-components'
-import { ui } from '~/consts/ui'
+import { theme } from '~/themes'
 
 const GlobalStyle = createGlobalStyle`
   * {
-    color: ${ui.font.baseColor};
+    color: ${theme.font.baseColor};
   }
 
   body {
@@ -14,10 +14,6 @@ const GlobalStyle = createGlobalStyle`
   a {
     cursor: pointer;
     text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 
   ul {
