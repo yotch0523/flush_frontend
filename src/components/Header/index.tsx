@@ -3,7 +3,6 @@ import { GiHamburgerMenu } from '@react-icons/all-files/gi/GiHamburgerMenu'
 import { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import DropDown from '~/components/common/DropDown'
-import { ui } from '~/consts/ui'
 import useUser from '~/hooks/useUser'
 import { getFullName, IUser } from '~/models/user'
 import { AppContext, AppContextType } from '~/providers/app'
@@ -58,7 +57,7 @@ const MyHeader = styled.header<{ backgroundColor?: string }>`
   width: 100%;
   height: ${height};
   display: flex;
-  ${({ backgroundColor }) => `background: ${backgroundColor ?? ui.backgroundColor.main};`}
+  ${(props) => `background: ${props.backgroundColor ?? props.theme.backgroundColor.main};`}
   justify-content: space-between;
   position: fixed;
 `
