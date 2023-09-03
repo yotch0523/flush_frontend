@@ -11,8 +11,14 @@ export const theme = {
     white: '#fff',
   },
   media: {
-    sm: '@media (max-width: 640px)',
-    md: '@media (max-width: 768px)',
-    lg: '@media (max-width: 1280px)',
+    sm: '@media (min-width: 640px)',
+    md: '@media (min-width: 768px)',
+    lg: '@media (min-width: 1024px)',
+    xl: '@media (min-width: 1280px)',
+  },
+  content: {
+    pc: {
+      maxWidth: '1280px',
+    },
   },
 }

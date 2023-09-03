@@ -23,9 +23,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           <AppContextProvider>
             <MsalAuthenticationTemplate interactionType={InteractionType.Redirect} authenticationRequest={authRequest}>
               <GlobalStyle />
-              <Component {...pageProps} />
               <Sidebar backgroundColor={theme.backgroundColor.main} color={theme.color.white} />
               <Header />
+              <Component {...pageProps} />
             </MsalAuthenticationTemplate>
           </AppContextProvider>
         </AuthProvider>
