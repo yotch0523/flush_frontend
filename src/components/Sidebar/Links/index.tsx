@@ -3,7 +3,6 @@ import { CgCardHearts } from '@react-icons/all-files/cg/CgCardHearts'
 import { FaLayerGroup } from '@react-icons/all-files/fa/FaLayerGroup'
 import Link from 'next/link'
 import styled from 'styled-components'
-import { ui } from '~/consts/ui'
 
 type Props = {
   backgroundColor?: string
@@ -23,7 +22,7 @@ enum IconType {
   History = 'history',
 }
 
-const renderIcon = (icon: IconType, color?: string) => {
+const renderIcon = (icon: IconType) => {
   switch (icon) {
     case IconType.Card:
       return <CgCardHearts />
@@ -36,7 +35,7 @@ const renderIcon = (icon: IconType, color?: string) => {
   }
 }
 
-const links = {
+const links: { [key: string]: Link[] } = {
   contents: [
     {
       label: 'カード管理',
@@ -90,7 +89,7 @@ const Links = ({ backgroundColor, color }: Props) => {
                   return (
                     <li key={`menu-link-${i}`}>
                       <Link href={href}>
-                        {renderIcon(icon, color)}
+                        {renderIcon(icon)}
                         <span>{label}</span>
                       </Link>
                     </li>
@@ -110,31 +109,35 @@ const Links = ({ backgroundColor, color }: Props) => {
 // style
 const indent = 16 // px
 const StyledMenu = styled.menu<{ backgroundColor?: string; color?: string }>`
-  ${({ backgroundColor }) => `background-color: ${backgroundColor ?? ui.backgroundColor.main};`}
+  ${(props) => `background-color: ${props.backgroundColor ?? props.theme.backgroundColor.main};`}
   & ul li a {
     padding: 8px ${indent * 2}px;
     display: flex;
     align-items: center;
 
+    &:hover {
+      background-color: #3e3d3c;
+    }
+
     & > * {
-      ${({ color }) => `color: ${color ?? ui.color.white}`};
+      ${(props) => `color: ${props.color ?? props.theme.color.white}`};
     }
 
     & > svg {
       margin-right: 10px;
-      ${({ color }) => `fill: ${color ?? ui.color.white}`};
+      ${(props) => `fill: ${props.color ?? props.theme.color.white}`};
       & > * {
-        ${({ color }) => `fill: ${color ?? ui.color.white}`};
+        ${(props) => `fill: ${props.color ?? props.theme.color.white}`};
       }
     }
   }
 `
 
-const StyledDivider = styled.li<{ color?: string }>`
+const StyledDivider = styled.li`
   & div {
     margin: 16px ${indent}px 0;
-    ${({ color }) => `border-bottom: 1px solid ${color ?? ui.color.white};
-    color: ${color ?? 'initial'};`}
+    ${(props) => `border-bottom: 1px solid ${props.color ?? props.theme.color.white};
+    color: ${props.color ?? 'initial'};`}
     padding: 0 0 4px;
     font-weight: bold;
   }

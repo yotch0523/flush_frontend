@@ -1,6 +1,6 @@
 import { AccountInfo } from '@azure/msal-browser'
 import { useMsal } from '@azure/msal-react'
-import { IUser } from '~/models/user'
+import { IUser } from '~/types/models/User'
 
 interface Account extends AccountInfo {
   idTokenClaims: {
