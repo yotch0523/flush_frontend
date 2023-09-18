@@ -17,7 +17,6 @@ const ToggleContainer = styled.div<{ height?: string }>`
 `
 
 const CustomUl = styled.ul<{ height?: string }>`
-  box-sizing: border-box;
   padding: 10px;
   width: 200px;
   position: absolute;

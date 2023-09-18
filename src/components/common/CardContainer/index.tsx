@@ -28,6 +28,14 @@ const StyledContainer = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+
+  & > * {
+    width: 50%;
+
+    ${({ theme }) => theme.media.lg} {
+      width: 25%;
+    }
+  }
 `
 
 const StyledBlankContainer = styled.div`

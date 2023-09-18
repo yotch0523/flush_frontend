@@ -3,6 +3,7 @@ import { theme } from '~/themes'
 
 const GlobalStyle = createGlobalStyle`
   * {
+    box-sizing: border-box;
     color: ${theme.font.baseColor};
   }
 

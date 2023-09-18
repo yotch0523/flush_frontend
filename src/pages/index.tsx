@@ -24,7 +24,7 @@ const Home = () => {
 
 // style
 const StyledSection = styled.section`
-  height: 160px;
+  height: auto;
   width: 100%;
 `
 
