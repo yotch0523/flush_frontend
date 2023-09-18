@@ -1,17 +1,13 @@
-import { useMsal } from '@azure/msal-react'
 import styled from 'styled-components'
 import CardContainer from '~/components/common/CardContainer'
 import CourseContainer from '~/components/common/CourseContainer'
 import useCards from '~/hooks/useCards'
 import useUser from '~/hooks/useUser'
 import HomeLayout from '~/layouts/HomeLayout'
-import { loginRequest } from '~/services/auth/config'
 
 const Home = () => {
   const user = useUser()
-  const { instance } = useMsal()
-  if (!user) return instance.loginRedirect(loginRequest)
-  const { cards } = useCards({ userId: user.aud })
+  const { cards } = useCards({ userId: user?.aud ?? undefined })
   return (
     <HomeLayout>
       <StyledSection>

@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react'
 import { ICard } from '~/types/models/Card'
 
 type Props = {
-  userId: string
+  userId?: string
 }
 
 const useCards = ({ userId }: Props) => {
   const [cards, setCards] = useState<ICard[] | null>(null)
-  console.info(userId)
+  if (!userId) throw new Error('Unauthorized')
   // TODO get data with graphql
   useEffect(() => {
     setCards([
