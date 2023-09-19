@@ -3,11 +3,11 @@ import Card from '~/components/common/Card'
 import { ICard } from '~/types/models/Card'
 
 type Props = {
-  cards: ICard[]
+  cards: ICard[] | null
 }
 
 const CardContainer = ({ cards }: Props) => {
-  if (cards.length === 0) {
+  if (!cards) {
     return (
       <StyledBlankContainer>
         <p>取得できるカードがまだありません</p>
@@ -27,6 +27,15 @@ const CardContainer = ({ cards }: Props) => {
 const StyledContainer = styled.div`
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
+
+  & > * {
+    width: 50%;
+
+    ${({ theme }) => theme.media.lg} {
+      width: 25%;
+    }
+  }
 `
 
 const StyledBlankContainer = styled.div`

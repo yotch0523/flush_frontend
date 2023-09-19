@@ -48,7 +48,6 @@ const Header = ({ backgroundColor }: Props) => {
 }
 
 const MyHeader = styled.header<{ backgroundColor?: string }>`
-  box-sizing: border-box;
   padding: 0 20px;
   width: 100%;
   height: ${height};

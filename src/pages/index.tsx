@@ -1,14 +1,18 @@
 import styled from 'styled-components'
 import CardContainer from '~/components/common/CardContainer'
 import CourseContainer from '~/components/common/CourseContainer'
+import useCards from '~/hooks/useCards'
+import useUser from '~/hooks/useUser'
 import HomeLayout from '~/layouts/HomeLayout'
 
 const Home = () => {
+  const user = useUser()
+  const { cards } = useCards({ userId: user?.aud ?? undefined })
   return (
     <HomeLayout>
       <StyledSection>
         <h1>カード</h1>
-        <CardContainer cards={[]}></CardContainer>
+        <CardContainer cards={cards}></CardContainer>
       </StyledSection>
       <StyledSection>
         <h1>コース</h1>
@@ -20,7 +24,7 @@ const Home = () => {
 
 // style
 const StyledSection = styled.section`
-  height: 160px;
+  height: auto;
   width: 100%;
 `
 
