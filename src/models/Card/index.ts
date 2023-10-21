@@ -1,4 +1,4 @@
-import { ICardTag } from '~/types/models/Card/Tag'
+import { ICardTag } from '~/models/Card/Tag'
 
 export interface ICard {
   id: string
@@ -6,6 +6,8 @@ export interface ICard {
   tags: ICardTag[]
   thumbnail: string
   description: string
+  createdAt: Date
+  updatedAt: Date
 }
 
 export function generateHref(card?: ICard) {

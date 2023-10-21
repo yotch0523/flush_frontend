@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { ICardTag } from '~/types/models/Card/Tag'
-import { getColorCode } from '~/types/models/Card/Tag/color'
+import { ICardTag } from '~/models/Card/Tag'
+import { getColorCode } from '~/models/Card/Tag/color'
 
 type Props = {
   tag: ICardTag

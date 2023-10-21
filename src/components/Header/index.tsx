@@ -4,8 +4,8 @@ import { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import DropDown from '~/components/common/DropDown'
 import useUser from '~/hooks/useUser'
+import { getFullName, IUser } from '~/models/User'
 import { AppContext, AppContextType } from '~/providers/app'
-import { getFullName, IUser } from '~/types/models/User'
 
 const height = '40px'
 

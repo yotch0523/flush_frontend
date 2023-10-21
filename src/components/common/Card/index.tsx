@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import styled from 'styled-components'
 import CardTag from '~/components/common/Card/Tag'
-import { generateHref, ICard } from '~/types/models/Card'
+import { generateHref, ICard } from '~/models/Card'
 
 type Props = {
   card: ICard
