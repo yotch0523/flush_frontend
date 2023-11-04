@@ -3,19 +3,15 @@ import styled from 'styled-components'
 import CardContainer from '~/components/common/CardContainer'
 import CourseContainer from '~/components/common/CourseContainer'
 import useFetchWithMsal from '~/hooks/useFetchWithMsal'
-import useUser from '~/hooks/useUser'
 import HomeLayout from '~/layouts/HomeLayout'
 import { ICard } from '~/models/Card'
 
 const Home = () => {
-  console.info('start rendering')
-  const user = useUser()
-  const { isLoading, data: cards, error, execute } = useFetchWithMsal<ICard[]>('GET', `/cards/${user?.aud ?? ''}`, null)
-  console.info('cards :', cards)
+  const { isLoading, data: cards, fetchError: error, msalFetch } = useFetchWithMsal<ICard[]>('POST', '/cards')
 
   useEffect(() => {
     void (async () => {
-      await execute()
+      await msalFetch()
     })()
   }, [])
 
@@ -24,7 +20,7 @@ const Home = () => {
   }
 
   if (error) {
-    return <HomeLayout>{error}</HomeLayout>
+    return <HomeLayout>{error.message}</HomeLayout>
   }
 
   return (
