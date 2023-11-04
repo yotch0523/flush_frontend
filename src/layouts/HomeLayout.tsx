@@ -1,11 +1,17 @@
 import styled from 'styled-components'
+import Breadcrumb from '~/components/common/Breadcrumb'
 
 type Props = {
   children: React.ReactNode
 }
 
 const HomeLayout = ({ children }: Props) => {
-  return <StyledContainer>{children}</StyledContainer>
+  return (
+    <StyledContainer>
+      <Breadcrumb />
+      {children}
+    </StyledContainer>
+  )
 }
 
 const StyledContainer = styled.div`
