@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { IUser } from '~/types/models/User'
+import { IUser } from '~/models/User'
 
 const AuthContext = React.createContext(
   {} as {

@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import styled from 'styled-components'
 import CardTag from '~/components/common/Card/Tag'
-import { generateHref, ICard } from '~/types/models/Card'
+import { ICard } from '~/models/Card'
 
 type Props = {
   card: ICard
 }
 const Card = ({ card }: Props) => {
   return (
-    <StyledContainer href={generateHref(card)}>
+    <StyledContainer href={`/cards/${card.id}`}>
       <Image src={card.thumbnail} alt={`card-thumbnail-${card.id}`} />
       <StyledTagContainer>
         {card.tags.map((tag, index) => (

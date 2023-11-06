@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Course from '~/components/common/Course'
-import { ICourse } from '~/types/models/Course'
+import { ICourse } from '~/models/Course'
 
 type Props = {
   courses: ICourse[]

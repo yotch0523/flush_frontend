@@ -4,8 +4,8 @@ import { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import DropDown from '~/components/common/DropDown'
 import useUser from '~/hooks/useUser'
+import { getFullName, IUser } from '~/models/User'
 import { AppContext, AppContextType } from '~/providers/app'
-import { getFullName, IUser } from '~/types/models/User'
 
 const height = '40px'
 
@@ -40,7 +40,7 @@ const Header = ({ backgroundColor }: Props) => {
         <GiHamburgerMenu onClick={() => dispatches[AppContextType.IsSidebarVisible]?.((v) => !(v || false))} />
       </SideBarCollapseButton>
 
-      <DropDown height={height} color='#fff' menus={menus}>
+      <DropDown height={height} width={'200px'} color='#fff' backgroundColor='transparent' menus={menus}>
         {getFullName(user) ?? ''}
       </DropDown>
     </MyHeader>

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Card from '~/components/common/Card'
-import { ICard } from '~/types/models/Card'
+import { ICard } from '~/models/Card'
 
 type Props = {
   cards: ICard[] | null

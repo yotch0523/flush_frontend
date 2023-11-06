@@ -1,13 +1,28 @@
+import { useEffect } from 'react'
 import styled from 'styled-components'
 import CardContainer from '~/components/common/CardContainer'
 import CourseContainer from '~/components/common/CourseContainer'
-import useCards from '~/hooks/useCards'
-import useUser from '~/hooks/useUser'
+import useFetchWithMsal from '~/hooks/useFetchWithMsal'
 import HomeLayout from '~/layouts/HomeLayout'
+import { ICard } from '~/models/Card'
 
 const Home = () => {
-  const user = useUser()
-  const { cards } = useCards({ userId: user?.aud ?? undefined })
+  const { isLoading, data: cards, fetchError: error, msalFetch } = useFetchWithMsal<ICard[]>('POST', '/cards')
+
+  useEffect(() => {
+    void (async () => {
+      await msalFetch()
+    })()
+  }, [])
+
+  if (isLoading) {
+    return <HomeLayout>Loading...</HomeLayout>
+  }
+
+  if (error) {
+    return <HomeLayout>{error.message}</HomeLayout>
+  }
+
   return (
     <HomeLayout>
       <StyledSection>
