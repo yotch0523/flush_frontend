@@ -9,8 +9,3 @@ export interface ICard {
   createdAt: Date
   updatedAt: Date
 }
-
-export function generateHref(card?: ICard) {
-  if (!card) return '/not-found'
-  return `/cards/${card.id}`
-}

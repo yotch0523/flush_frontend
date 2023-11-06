@@ -40,7 +40,7 @@ const Header = ({ backgroundColor }: Props) => {
         <GiHamburgerMenu onClick={() => dispatches[AppContextType.IsSidebarVisible]?.((v) => !(v || false))} />
       </SideBarCollapseButton>
 
-      <DropDown height={height} color='#fff' menus={menus}>
+      <DropDown height={height} width={'200px'} color='#fff' backgroundColor='transparent' menus={menus}>
         {getFullName(user) ?? ''}
       </DropDown>
     </MyHeader>

@@ -1,6 +1,6 @@
 import { InteractionRequiredAuthError, InteractionType, SilentRequest } from '@azure/msal-browser'
 import { useMsal, useMsalAuthentication } from '@azure/msal-react'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
@@ -11,10 +11,10 @@ const config: ApiConfig = {
   b2cScopes: process.env.NEXT_PUBLIC_API_SCOPE ? [process.env.NEXT_PUBLIC_API_SCOPE] : [],
 }
 
-const useFetchWithMsal = <T,>(method: HttpMethod, endpoint: string, body: FormData | null) => {
+const useFetchWithMsal = <T,>(method: HttpMethod = 'POST', endpoint: string) => {
   const { accounts, instance } = useMsal()
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<any>(null)
+  const [fetchError, setFetchError] = useState<any>(null)
   const [data, setData] = useState<T | null>(null)
 
   const account = accounts.length > 0 ? accounts[0] : undefined
@@ -33,8 +33,9 @@ const useFetchWithMsal = <T,>(method: HttpMethod, endpoint: string, body: FormDa
   console.info('result :', result)
   console.info('msalError :', msalError)
 
-  const execute = useCallback(async () => {
+  const msalFetch = useCallback(async (body?: FormData | null) => {
     try {
+      await instance.initialize()
       const accessTokenResponse = await instance.acquireTokenSilent(tokenRequest)
       if (!accessTokenResponse.accessToken || accessTokenResponse.accessToken === '')
         throw new InteractionRequiredAuthError()
@@ -52,27 +53,23 @@ const useFetchWithMsal = <T,>(method: HttpMethod, endpoint: string, body: FormDa
 
       setIsLoading(true)
       const response = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + endpoint, options)
-      const result = await response.json()
+      const result = (await response.json()) as T
       setData(result)
       setIsLoading(false)
     } catch (error) {
       if (error instanceof InteractionRequiredAuthError) {
         await instance.acquireTokenRedirect(tokenRequest)
       } else {
-        setError(error)
+        setFetchError(error)
       }
     }
-  }, [body])
-
-  useEffect(() => {
-    void (async () => {})()
-  }, [body])
+  }, [])
 
   return {
     isLoading,
-    error,
+    fetchError,
     data,
-    execute,
+    msalFetch,
   }
 }
 

@@ -6,6 +6,8 @@ export const theme = {
   },
   backgroundColor: {
     main: '#1c1c1c',
+    sub: '#f5f5f5',
+    cream: '#fffaf0',
   },
   color: {
     white: '#fff',
