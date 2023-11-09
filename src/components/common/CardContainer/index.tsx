@@ -16,9 +16,7 @@ const CardContainer = ({ cards }: Props) => {
   } else {
     return (
       <StyledContainer>
-        {cards.map((card, index) => (
-          <Card card={card} key={`card-${index}`} />
-        ))}
+        {cards ? cards.map((card, index) => <Card card={card} key={`card-${index}`} />) : <>カードが見つかりません。</>}
       </StyledContainer>
     )
   }
