@@ -4,6 +4,12 @@ import { useCallback, useMemo, useState } from 'react'
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
+type Result<T> = {
+  statusCode: number
+  message: string
+  data: T
+}
+
 type ApiConfig = {
   b2cScopes: string[]
 }
@@ -53,8 +59,14 @@ const useFetchWithMsal = <T,>(method: HttpMethod = 'POST', endpoint: string) => 
 
       setIsLoading(true)
       const response = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + endpoint, options)
-      const result = (await response.json()) as T
-      setData(result)
+      const result: Result<T> = await response.json()
+
+      if (result.statusCode !== 200) {
+        setData(null)
+        throw new Error(result.message)
+      }
+
+      setData(result.data)
       setIsLoading(false)
     } catch (error) {
       if (error instanceof InteractionRequiredAuthError) {
@@ -62,6 +74,7 @@ const useFetchWithMsal = <T,>(method: HttpMethod = 'POST', endpoint: string) => 
       } else {
         setFetchError(error)
       }
+      setIsLoading(false)
     }
   }, [])
 
