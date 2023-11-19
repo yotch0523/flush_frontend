@@ -1,6 +1,6 @@
 import { AccountInfo } from '@azure/msal-browser'
 import { useMsal } from '@azure/msal-react'
-import { IUser } from '~/types/models/User'
+import { IUser } from '~/models/User'
 
 interface Account extends AccountInfo {
   idTokenClaims: {
@@ -23,6 +23,7 @@ const useUser = (): IUser | null | undefined => {
   if (accounts.length > 0) {
     const account = accounts[0] as Account
     const user: IUser = {
+      aud: account.idTokenClaims?.aud,
       sub: account.idTokenClaims?.sub,
       familyName: account.idTokenClaims?.family_name,
       givenName: account.idTokenClaims?.given_name,

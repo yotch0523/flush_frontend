@@ -1,4 +1,5 @@
 export interface IUser {
+  aud: string
   sub: string
   familyName: string
   givenName: string

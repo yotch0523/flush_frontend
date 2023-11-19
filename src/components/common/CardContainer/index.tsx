@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 import Card from '~/components/common/Card'
-import { ICard } from '~/types/models/Card'
+import { ICard } from '~/models/Card'
 
 type Props = {
-  cards: ICard[]
+  cards: ICard[] | null
 }
 
 const CardContainer = ({ cards }: Props) => {
-  if (cards.length === 0) {
+  if (!cards) {
     return (
       <StyledBlankContainer>
         <p>取得できるカードがまだありません</p>
@@ -16,9 +16,7 @@ const CardContainer = ({ cards }: Props) => {
   } else {
     return (
       <StyledContainer>
-        {cards.map((card, index) => (
-          <Card card={card} key={`card-${index}`} />
-        ))}
+        {cards ? cards.map((card, index) => <Card card={card} key={`card-${index}`} />) : <>カードが見つかりません。</>}
       </StyledContainer>
     )
   }
@@ -27,6 +25,15 @@ const CardContainer = ({ cards }: Props) => {
 const StyledContainer = styled.div`
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
+
+  & > * {
+    width: 50%;
+
+    ${({ theme }) => theme.media.lg} {
+      width: 25%;
+    }
+  }
 `
 
 const StyledBlankContainer = styled.div`

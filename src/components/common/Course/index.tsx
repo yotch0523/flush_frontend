@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import styled from 'styled-components'
 // import CourseTag from '~/components/common/Course/'
-import { ICourse } from '~/types/models/Course'
+import { ICourse } from '~/models/Course'
 
 type Props = {
   course: ICourse

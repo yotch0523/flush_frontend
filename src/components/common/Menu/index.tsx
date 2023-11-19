@@ -7,7 +7,7 @@ type Props = {
   color?: string
 } & menu
 
-const Menu = ({ color, label, pathname, query, onClick }: Props) => {
+const Menu = ({ color, label, href: pathname, query, onClick }: Props) => {
   if (pathname) {
     return (
       <StyledContainer color={color}>
@@ -26,8 +26,10 @@ const Menu = ({ color, label, pathname, query, onClick }: Props) => {
 }
 
 const StyledContainer = styled.div<{ color?: string }>`
-  padding: 10px;
+  width: 100%;
+  text-align: center;
   & > * {
+    width: 100%;
     ${({ color }) => `color: ${color ?? 'initial'};`}
   }
 `

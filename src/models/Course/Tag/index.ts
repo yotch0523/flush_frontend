@@ -1,4 +1,4 @@
-import { CourseTagColor } from '~/types/models/Course/Tag/color'
+import { CourseTagColor } from '~/models/Course/Tag/color'
 
 export interface ICourseTag {
   id: string
