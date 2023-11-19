@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import CardContainer from '~/components/common/CardContainer'
 import CourseContainer from '~/components/common/CourseContainer'
@@ -7,13 +7,18 @@ import HomeLayout from '~/layouts/HomeLayout'
 import { ICard } from '~/models/Card'
 
 const Home = () => {
-  const { isLoading, data: cards, fetchError: error, msalFetch } = useFetchWithMsal<ICard[]>('POST', '/cards')
+  const [cards, setCards] = useState<ICard[]>([])
+  const { isLoading, data, fetchError: error, msalFetch } = useFetchWithMsal<ICard[]>('POST', '/cards')
 
   useEffect(() => {
     void (async () => {
       await msalFetch()
     })()
   }, [])
+
+  useEffect(() => {
+    setCards(data ?? [])
+  }, [data])
 
   if (isLoading) {
     return <HomeLayout>Loading...</HomeLayout>
