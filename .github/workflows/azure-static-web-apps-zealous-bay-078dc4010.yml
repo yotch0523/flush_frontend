@@ -41,7 +41,7 @@ jobs:
           NEXT_PUBLIC_AUTHORITY_DOMAIN: stgflush.b2clogin.com
           NEXT_PUBLIC_API: https://stgflush.onmicrosoft.com/tasks-api
           NEXT_PUBLIC_API_SCOPE: https://stgflush.onmicrosoft.com/tasks-api/tasks.write
-          NEXT_PUBLIC_API_ENDPOINT: https://stg-flush.azurewebsites.net
+          NEXT_PUBLIC_API_ENDPOINT: https://stgflushapp.azurewebsites.net
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
