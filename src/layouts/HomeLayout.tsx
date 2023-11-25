@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Breadcrumb from '~/components/common/Breadcrumb'
+import Breadcrumb from '~/modules/_common/components/Breadcrumb'
 
 type Props = {
   children: React.ReactNode

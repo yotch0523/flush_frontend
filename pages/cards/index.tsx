@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import CardContainer from '~/components/common/CardContainer'
-import ToolBar from '~/components/common/ToolBar'
-import useFetchWithMsal from '~/hooks/useFetchWithMsal'
 import HomeLayout from '~/layouts/HomeLayout'
-import { ICard } from '~/models/Card'
+import CardContainer from '~/modules/_common/components/CardContainer'
+import ToolBar from '~/modules/_common/components/ToolBar'
+import useFetchWithMsal from '~/modules/_common/hooks/useFetchWithMsal'
+import { ICard } from '~/modules/card/models/card'
 
 const CardListPage = () => {
   const [cards, setCards] = useState<ICard[]>([])
