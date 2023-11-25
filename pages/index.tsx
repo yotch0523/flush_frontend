@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import CardContainer from '~/components/common/CardContainer'
-import CourseContainer from '~/components/common/CourseContainer'
-import useFetchWithMsal from '~/hooks/useFetchWithMsal'
 import HomeLayout from '~/layouts/HomeLayout'
-import { ICard } from '~/models/Card'
+import CardContainer from '~/modules/_common/components/CardContainer'
+import CourseContainer from '~/modules/_common/components/CourseContainer'
+import useFetchWithMsal from '~/modules/_common/hooks/useFetchWithMsal'
+import { ICard } from '~/modules/card/models/card'
 
 const Home = () => {
   const [cards, setCards] = useState<ICard[]>([])
