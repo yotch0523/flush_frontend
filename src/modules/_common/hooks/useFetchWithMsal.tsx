@@ -57,6 +57,7 @@ const useFetchWithMsal = <T,>(method: HttpMethod = 'POST', endpoint: string) => 
 
       setIsLoading(true)
       const response = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + endpoint, options)
+      if (!response.ok) throw new Error(response.statusText)
       const result: T = await response.json()
 
       setData(result)
@@ -65,6 +66,7 @@ const useFetchWithMsal = <T,>(method: HttpMethod = 'POST', endpoint: string) => 
       if (error instanceof InteractionRequiredAuthError) {
         await instance.acquireTokenRedirect(tokenRequest)
       } else {
+        setData(null)
         setFetchError(error)
       }
       setIsLoading(false)

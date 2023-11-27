@@ -7,8 +7,8 @@ import useFetchWithMsal from '~/modules/_common/hooks/useFetchWithMsal'
 import { ICard } from '~/modules/card/models/card'
 
 const Home = () => {
-  const [cards, setCards] = useState<ICard[]>([])
-  const { isLoading, data, fetchError: error, msalFetch } = useFetchWithMsal<ICard[]>('POST', '/cards')
+  const [cards, setCards] = useState<ICard[] | null>(null)
+  const { isLoading, data, fetchError: error, msalFetch } = useFetchWithMsal<ICard[] | null>('POST', '/cards')
 
   useEffect(() => {
     void (async () => {
@@ -17,7 +17,7 @@ const Home = () => {
   }, [])
 
   useEffect(() => {
-    setCards(data ?? [])
+    setCards(data)
   }, [data])
 
   if (isLoading) {
