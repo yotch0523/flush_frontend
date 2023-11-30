@@ -2,13 +2,13 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser'
 import { MsalAuthenticationTemplate, MsalProvider } from '@azure/msal-react'
 import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'styled-components'
-import Header from '~/components/Header'
-import Sidebar from '~/components/Sidebar'
 import GlobalStyle from '~/globalStyles'
+import Header from '~/modules/_common/components/Header'
+import Sidebar from '~/modules/_common/components/Sidebar'
+import { loginRequest, msalConfig } from '~/modules/_common/services/auth/config'
+import { theme } from '~/modules/_common/themes'
 import AppContextProvider from '~/providers/app'
 import AuthProvider from '~/providers/auth'
-import { loginRequest, msalConfig } from '~/services/auth/config'
-import { theme } from '~/themes'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const instance = new PublicClientApplication(msalConfig)
