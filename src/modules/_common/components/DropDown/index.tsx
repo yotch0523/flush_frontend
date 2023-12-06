@@ -29,14 +29,14 @@ const DropDown = ({ children, height, width, backgroundColor, color, menus }: Pr
   const [isActive, setIsActive] = useState(false)
 
   return (
-    <ToggleContainer
+    <StyledToggleContainer
       height={height}
       width={width}
       // onBlur={() => {
       //   setIsActive(false)
       // }}
     >
-      <ButtonAnchor
+      <StyledButtonAnchor
         href='#'
         onClick={(event) => {
           if (event.target === event.currentTarget) {
@@ -50,16 +50,16 @@ const DropDown = ({ children, height, width, backgroundColor, color, menus }: Pr
         color={color}
       >
         {children}
-      </ButtonAnchor>
+      </StyledButtonAnchor>
       {isActive ? MenuList(menus, height) : null}
-    </ToggleContainer>
+    </StyledToggleContainer>
   )
 }
 
 export default DropDown
 
 // style
-const ToggleContainer = styled.div<{ height?: string; width?: string }>`
+const StyledToggleContainer = styled.div<{ height?: string; width?: string }>`
   ${({ height }) => `height: ${height ?? 'initial'}`};
   ${({ width }) => `width: ${width ?? 'initial'}`};
   display: inline-block;
@@ -81,7 +81,7 @@ const StyledLi = styled.li<{ backgroundColor?: string }>`
   ${({ backgroundColor }) => `background-color: ${backgroundColor ?? '#fff'}`}
 `
 
-const ButtonAnchor = styled.a<{ height?: string; backgroundColor?: string }>`
+const StyledButtonAnchor = styled.a<{ height?: string; backgroundColor?: string }>`
   border: none;
   border-radius: 4px;
   ${({ height }) => `height: ${height ?? 'initial'}`};

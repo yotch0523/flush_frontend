@@ -2,26 +2,33 @@ import styled from 'styled-components'
 
 type Props = {
   label: string
-  onClick: (event: Event) => void
+  onClick?: (event: Event) => void
   height?: string
-  color?: string
+  backgroundColor?: string
 }
 
-const Button = ({ label, onClick, height, color }: Props) => {
+const Button = ({ label, onClick, height, backgroundColor }: Props) => {
+  if (!onClick) {
+    return (
+      <StyledButton type={'submit'} height={height} backgroundColor={backgroundColor}>
+        {label}
+      </StyledButton>
+    )
+  }
   return (
-    <CustomButton onClick={onClick} height={height} color={color}>
+    <StyledButton onClick={onClick} height={height} backgroundColor={backgroundColor}>
       {label}
-    </CustomButton>
+    </StyledButton>
   )
 }
 
-const CustomButton = styled.button<{ onClick: (event: Event) => void; height?: string; color?: string }>`
+const StyledButton = styled.button<{ onClick?: (event: Event) => void; height?: string; backgroundColor?: string }>`
   border: none;
-  background: transparent;
+  ${({ theme }) => `padding: ${theme.form.button.padding} 0;`}
+  ${({ backgroundColor }) => `background-color: ${backgroundColor ?? 'initial'}`};
   ${({ height }) => `height: ${height ?? 'initial'}`};
   width: 100%;
   line-height: 100%;
-  ${({ color }) => `color: ${color ?? 'initial'}`};
   cursor: pointer;
 
   &:hover {
