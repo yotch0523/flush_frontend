@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import styled from 'styled-components'
 import { InferType } from 'yup'
 import HomeLayout from '~/layouts/HomeLayout'
 import Button from '~/modules/_common/components/Button'
@@ -36,9 +37,16 @@ const CreateCardPage = () => {
           <TextAreaField formPath={'description'} label={t('card.form.description')} required={true} maxLength={1000} />
         </FormProvider>
       </form>
-      <Button label={t('common.form.register')} backgroundColor={theme.form.button.color} />
+      <StyledButtonContainer>
+        <Button label={t('common.form.register')} backgroundColor={theme.form.button.color} width={200} />
+      </StyledButtonContainer>
     </HomeLayout>
   )
 }
+
+const StyledButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`
 
 export default CreateCardPage
