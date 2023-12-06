@@ -7,7 +7,7 @@ import { ICard } from '~/modules/card/models/card'
 
 const CardListPage = () => {
   const [cards, setCards] = useState<ICard[]>([])
-  const { isLoading, data, fetchError: error, msalFetch } = useFetchWithMsal<ICard[]>('POST', '/cards')
+  const { loading: isLoading, data, fetchError: error, msalFetch } = useFetchWithMsal<ICard[]>('POST', '/cards')
 
   useEffect(() => {
     void (async () => {

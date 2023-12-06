@@ -23,4 +23,13 @@ export const theme = {
       maxWidth: '1280px',
     },
   },
+  form: {
+    button: {
+      padding: '12px',
+      color: '#1c1c1c',
+    },
+    container: {
+      padding: '10px',
+    },
+  },
 }

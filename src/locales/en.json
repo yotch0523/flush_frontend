@@ -1,0 +1,14 @@
+{
+  "common": {
+    "form": {
+      "register": "register"
+    }
+  },
+  "card": {
+    "form": {
+      "title": "title",
+      "thumbnail": "thumbnail",
+      "description": "description"
+    }
+  }
+}

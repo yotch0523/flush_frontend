@@ -14,7 +14,12 @@ type Prpos = {
 export const useForm = <T,>({ schema, controller, action, userId }: Prpos) => {
   type FormSchemaType = z.infer<typeof schema>
 
-  const { isLoading, data, fetchError, msalFetch: execute } = useFetchWithMsal<T>('POST', `/${controller}/${action}`)
+  const {
+    loading: isLoading,
+    data,
+    fetchError,
+    msalFetch: execute,
+  } = useFetchWithMsal<T>('POST', `/${controller}/${action}`)
 
   const {
     register,

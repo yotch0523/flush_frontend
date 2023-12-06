@@ -2,26 +2,40 @@ import styled from 'styled-components'
 
 type Props = {
   label: string
-  onClick: (event: Event) => void
-  height?: string
-  color?: string
+  onClick?: (event: Event) => void
+  height?: number
+  width?: number
+  backgroundColor?: string
 }
 
-const Button = ({ label, onClick, height, color }: Props) => {
+const Button = ({ label, onClick, height, width = 100, backgroundColor }: Props) => {
+  if (!onClick) {
+    return (
+      <StyledButton type={'submit'} height={height} width={width} backgroundColor={backgroundColor}>
+        {label}
+      </StyledButton>
+    )
+  }
   return (
-    <CustomButton onClick={onClick} height={height} color={color}>
+    <StyledButton onClick={onClick} height={height} width={width} backgroundColor={backgroundColor}>
       {label}
-    </CustomButton>
+    </StyledButton>
   )
 }
 
-const CustomButton = styled.button<{ onClick: (event: Event) => void; height?: string; color?: string }>`
+const StyledButton = styled.button<{
+  onClick?: (event: Event) => void
+  height?: number
+  width: number
+  backgroundColor?: string
+}>`
   border: none;
-  background: transparent;
-  ${({ height }) => `height: ${height ?? 'initial'}`};
-  width: 100%;
+  border-radius: 6px;
+  ${({ theme }) => `padding: ${theme.form.button.padding} 0;`}
+  ${({ backgroundColor }) => `background-color: ${backgroundColor ?? 'initial'}`};
+  ${({ height }) => `height: ${height ?? 'initial'}px`};
+  ${({ width }) => `width: ${width}px`};
   line-height: 100%;
-  ${({ color }) => `color: ${color ?? 'initial'}`};
   cursor: pointer;
 
   &:hover {
