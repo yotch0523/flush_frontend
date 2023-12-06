@@ -8,7 +8,7 @@ import { ICard } from '~/modules/card/models/card'
 
 const Home = () => {
   const [cards, setCards] = useState<ICard[] | null>(null)
-  const { isLoading, data, fetchError: error, msalFetch } = useFetchWithMsal<ICard[] | null>('POST', '/cards')
+  const { loading: isLoading, data, fetchError: error, msalFetch } = useFetchWithMsal<ICard[] | null>('POST', '/cards')
 
   useEffect(() => {
     void (async () => {

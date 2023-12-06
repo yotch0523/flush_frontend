@@ -1,0 +1,14 @@
+{
+  "common": {
+    "form": {
+      "register": "register"
+    }
+  },
+  "card": {
+    "form": {
+      "title": "タイトル",
+      "thumbnail": "サムネイル",
+      "description": "説明"
+    }
+  }
+}

@@ -13,7 +13,7 @@ const config: ApiConfig = {
 
 const useFetchWithMsal = <T,>(method: HttpMethod = 'POST', endpoint: string) => {
   const { accounts, instance } = useMsal()
-  const [isLoading, setIsLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [fetchError, setFetchError] = useState<any>(null)
   const [data, setData] = useState<T | null>(null)
 
@@ -55,13 +55,13 @@ const useFetchWithMsal = <T,>(method: HttpMethod = 'POST', endpoint: string) => 
         body,
       }
 
-      setIsLoading(true)
+      setLoading(true)
       const response = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + endpoint, options)
       if (!response.ok) throw new Error(response.statusText)
       const result: T = await response.json()
 
       setData(result)
-      setIsLoading(false)
+      setLoading(false)
     } catch (error) {
       if (error instanceof InteractionRequiredAuthError) {
         await instance.acquireTokenRedirect(tokenRequest)
@@ -69,12 +69,12 @@ const useFetchWithMsal = <T,>(method: HttpMethod = 'POST', endpoint: string) => 
         setData(null)
         setFetchError(error)
       }
-      setIsLoading(false)
+      setLoading(false)
     }
   }, [])
 
   return {
-    isLoading,
+    loading,
     fetchError,
     data,
     msalFetch,
