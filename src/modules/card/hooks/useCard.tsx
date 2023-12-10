@@ -1,16 +1,21 @@
 import useFetchWithMsal from '~/modules/_common/hooks/useFetchWithMsal'
 
-export const useCard = () => {
-  const { loading, msalFetch, fetchError } = useFetchWithMsal('POST', '/cards')
+type Response = {
+  id: string
+}
 
-  const onSubmit = async (data) => {
+export const useCard = () => {
+  const { loading, msalFetch, fetchError, data } = useFetchWithMsal<Response>('POST', '/cards/create')
+
+  const create = async (body) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    await msalFetch(data)
+    await msalFetch(body)
   }
 
   return {
     loading,
-    onSubmit,
+    create,
     error: fetchError,
+    data,
   }
 }

@@ -8,6 +8,9 @@
     "form": {
       "title": "title",
       "thumbnail": "thumbnail",
+      "cardCode": "card code",
+      "question": "question",
+      "answer": "answer",
       "description": "description"
     }
   }
