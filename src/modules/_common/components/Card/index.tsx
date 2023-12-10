@@ -9,7 +9,7 @@ type Props = {
 const Card = ({ card }: Props) => {
   return (
     <StyledContainer href={`/cards/${card.id}`}>
-      <Image src={card.thumbnail} alt={`card-thumbnail-${card.id}`} />
+      <Image src={card.thumbnail} alt={`card-thumbnail-${card.id}`} height={100} width={100} />
       <StyledTagContainer>
         {card.tags.map((tag, index) => (
           <CardTag tag={tag} key={`card-tag-${index}`} />

@@ -7,7 +7,6 @@ type Props = {
 }
 
 const CardContainer = ({ cards }: Props) => {
-  console.info('cards :', cards)
   if (!cards) {
     return (
       <StyledBlankContainer>

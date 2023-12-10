@@ -17,6 +17,14 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+  input {
+    width: ${theme.form.input.width};
+  }
+
+  textarea {
+    width: ${theme.form.input.width};
+  }
+
   ul {
     margin: 0;
     padding-left: 0;

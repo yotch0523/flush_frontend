@@ -31,5 +31,8 @@ export const theme = {
     container: {
       padding: '10px',
     },
+    input: {
+      width: '200px',
+    },
   },
 }

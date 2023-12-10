@@ -8,6 +8,9 @@
     "form": {
       "title": "タイトル",
       "thumbnail": "サムネイル",
+      "cardCode": "カードコード",
+      "question": "設問文",
+      "answer": "解答",
       "description": "説明"
     }
   }

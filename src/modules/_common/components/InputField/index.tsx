@@ -1,5 +1,8 @@
+import { useCallback } from 'react'
 import { useFormContext } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { styled } from 'styled-components'
+import useFormError from '~/modules/_common/hooks/useFormError'
 
 type InputType = 'text' | 'textarea' | 'tel' | 'password' | 'email'
 
@@ -13,7 +16,7 @@ type Props = {
   maxLength?: number
 }
 
-const TextField = ({
+const InputField = ({
   formPath,
   label,
   type = 'text',
@@ -23,13 +26,40 @@ const TextField = ({
   maxLength = 100,
 }: Props) => {
   const { register } = useFormContext()
+  const { t } = useTranslation()
+  const error = useFormError(formPath)
+
+  const generateInput = useCallback(() => {
+    switch (type) {
+      case 'textarea':
+        return (
+          <>
+            <textarea {...register(formPath)} maxLength={maxLength} readOnly={readOnly} required={required} />
+          </>
+        )
+      default:
+        return (
+          <>
+            <input type={type} {...register(formPath)} maxLength={maxLength} readOnly={readOnly} required={required} />
+          </>
+        )
+    }
+  }, [])
+
+  const generateHelperText = useCallback(() => {
+    return (
+      <>
+        <div>{error?.message ? t(error?.message) : helperText}</div>
+      </>
+    )
+  }, [error])
 
   return (
     <StyledContainer>
       <StyledLabelContainer>{label}</StyledLabelContainer>
       <StyledInputContainer>
-        <input type={type} {...register(formPath)} maxLength={maxLength} readOnly={readOnly} required={required} />
-        <div>{helperText}</div>
+        {generateInput()}
+        {generateHelperText()}
       </StyledInputContainer>
     </StyledContainer>
   )
@@ -53,4 +83,4 @@ const StyledInputContainer = styled.div`
   flex-grow: 1;
 `
 
-export default TextField
+export default InputField
