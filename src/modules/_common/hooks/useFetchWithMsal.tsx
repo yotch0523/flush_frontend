@@ -48,11 +48,12 @@ const useFetchWithMsal = <T,>(method: HttpMethod = 'POST', endpoint: string) => 
       const bearer = `Bearer ${accessTokenResponse.accessToken}`
       headers.append('Authorization', bearer)
       headers.append('x-user-id', account?.idTokenClaims?.sub ?? '')
+      headers.append('Content-Type', 'application/json')
 
       const options = {
         method,
         headers,
-        body,
+        body: JSON.stringify(body),
       }
 
       setLoading(true)
@@ -61,7 +62,6 @@ const useFetchWithMsal = <T,>(method: HttpMethod = 'POST', endpoint: string) => 
       const result: T = await response.json()
 
       setData(result)
-      setLoading(false)
     } catch (error) {
       if (error instanceof InteractionRequiredAuthError) {
         await instance.acquireTokenRedirect(tokenRequest)
@@ -69,6 +69,7 @@ const useFetchWithMsal = <T,>(method: HttpMethod = 'POST', endpoint: string) => 
         setData(null)
         setFetchError(error)
       }
+    } finally {
       setLoading(false)
     }
   }, [])

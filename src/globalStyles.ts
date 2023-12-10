@@ -17,6 +17,21 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+  input {
+    width: ${theme.form.input.width};
+    padding: 6px 0;
+    &.error {
+      ${({ theme }) => `border: ${theme.font.danger} 1px solid;`}
+    }
+  }
+
+  textarea {
+    width: ${theme.form.input.width};
+    &.error {
+      ${({ theme }) => `border: ${theme.font.danger} 1px solid;`}
+    }
+  }
+
   ul {
     margin: 0;
     padding-left: 0;
@@ -28,6 +43,10 @@ const GlobalStyle = createGlobalStyle`
 
   menu {
     padding: initial;
+  }
+
+  .error {
+    ${({ theme }) => `color: ${theme.font.danger};`}
   }
 `
 

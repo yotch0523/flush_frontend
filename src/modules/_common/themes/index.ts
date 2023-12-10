@@ -3,6 +3,7 @@ import 'styled-components'
 export const theme = {
   font: {
     baseColor: '#333',
+    danger: '#f00',
   },
   backgroundColor: {
     main: '#1c1c1c',
@@ -30,6 +31,9 @@ export const theme = {
     },
     container: {
       padding: '10px',
+    },
+    input: {
+      width: '200px',
     },
   },
 }
