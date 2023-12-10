@@ -1,9 +1,12 @@
-import { get as getFromPath } from 'lodash'
-import { useFormState } from 'react-hook-form'
+import { get } from 'lodash'
+import { useFormContext } from 'react-hook-form'
 
 const useFormError = (formPath: string) => {
-  const formState = useFormState()
-  const error = getFromPath(formState.errors, formPath)
+  const context = useFormContext<{ [key: string]: string }>()
+  const {
+    formState: { errors },
+  } = context
+  const error = get(errors, formPath)
   return error
 }
 

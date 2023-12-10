@@ -34,13 +34,26 @@ const InputField = ({
       case 'textarea':
         return (
           <>
-            <textarea {...register(formPath)} maxLength={maxLength} readOnly={readOnly} required={required} />
+            <textarea
+              className={!!error ? 'error' : ''}
+              {...register(formPath)}
+              maxLength={maxLength}
+              readOnly={readOnly}
+              required={required}
+            />
           </>
         )
       default:
         return (
           <>
-            <input type={type} {...register(formPath)} maxLength={maxLength} readOnly={readOnly} required={required} />
+            <input
+              className={!!error ? 'error' : ''}
+              type={type}
+              {...register(formPath)}
+              maxLength={maxLength}
+              readOnly={readOnly}
+              required={required}
+            />
           </>
         )
     }
@@ -49,7 +62,7 @@ const InputField = ({
   const generateHelperText = useCallback(() => {
     return (
       <>
-        <div>{error?.message ? t(error?.message) : helperText}</div>
+        <div className={!!error ? 'error' : ''}>{error?.message ? t(`${error.message}`) : helperText}</div>
       </>
     )
   }, [error])

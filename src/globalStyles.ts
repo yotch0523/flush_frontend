@@ -19,10 +19,17 @@ const GlobalStyle = createGlobalStyle`
 
   input {
     width: ${theme.form.input.width};
+    padding: 6px 0;
+    &.error {
+      ${({ theme }) => `border: ${theme.font.danger} 1px solid;`}
+    }
   }
 
   textarea {
     width: ${theme.form.input.width};
+    &.error {
+      ${({ theme }) => `border: ${theme.font.danger} 1px solid;`}
+    }
   }
 
   ul {
@@ -36,6 +43,10 @@ const GlobalStyle = createGlobalStyle`
 
   menu {
     padding: initial;
+  }
+
+  .error {
+    ${({ theme }) => `color: ${theme.font.danger};`}
   }
 `
 
