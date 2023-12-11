@@ -54,14 +54,16 @@ const CreateCardPage = () => {
             formPath={'cardCode'}
             label={t('card.form.cardCode')}
             required={true}
-            maxLength={1000}
+            maxLength={30}
           />
           <InputField
             key={'thumbnail'}
+            type={'image'}
             formPath={'thumbnail'}
             label={t('card.form.thumbnail')}
             required={true}
-            maxLength={30}
+            maxLength={1000}
+            domain='card'
           />
           <InputField
             key={'question'}

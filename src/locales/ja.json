@@ -1,17 +1,38 @@
 {
   "common": {
     "form": {
-      "register": "register"
+      "register": {
+        "label": "登録"
+      },
+      "file": {
+        "label": "ファイル",
+        "events": {
+          "success": "ファイルのアップロードに成功しました",
+          "error": "ファイルのアップロードに失敗しました"
+        }
+      }
     }
   },
   "card": {
     "form": {
-      "title": "タイトル",
-      "thumbnail": "サムネイル",
-      "cardCode": "カードコード",
-      "question": "設問文",
-      "answer": "解答",
-      "description": "説明"
+      "title": {
+        "label": "タイトル"
+      },
+      "thumbnail": {
+        "label": "サムネイル"
+      },
+      "cardCode": {
+        "label": "カードコード"
+      },
+      "question": {
+        "label": "設問文"
+      },
+      "answer": {
+        "label": "解答"
+      },
+      "description": {
+        "label": "説明"
+      }
     }
   }
 }

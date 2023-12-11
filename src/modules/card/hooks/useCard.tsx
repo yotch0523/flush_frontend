@@ -8,8 +8,12 @@ export const useCard = () => {
   const { loading, msalFetch, fetchError, data } = useFetchWithMsal<Response>('POST', '/cards/create')
 
   const create = async (body) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    await msalFetch(body)
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      await msalFetch(body)
+    } catch (error) {
+      console.info(error)
+    }
   }
 
   return {

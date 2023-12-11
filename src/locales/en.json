@@ -1,17 +1,38 @@
 {
   "common": {
     "form": {
-      "register": "register"
+      "register": {
+        "label": "register"
+      },
+      "file": {
+        "label": "file",
+        "events": {
+          "success": "succeeded to upload file",
+          "error": "failed to upload file"
+        }
+      }
     }
   },
   "card": {
     "form": {
-      "title": "title",
-      "thumbnail": "thumbnail",
-      "cardCode": "card code",
-      "question": "question",
-      "answer": "answer",
-      "description": "description"
+      "title": {
+        "label": "title"
+      },
+      "thumbnail": {
+        "label": "thumbnail"
+      },
+      "cardCode": {
+        "label": "card code"
+      },
+      "question": {
+        "label": "question"
+      },
+      "answer": {
+        "label": "answer"
+      },
+      "description": {
+        "label": "description"
+      }
     }
   }
 }
