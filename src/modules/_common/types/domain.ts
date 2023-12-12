@@ -1,1 +1,1 @@
-export type Domain = 'card' | 'course'
+export type Domain = 'cards' | 'courses'

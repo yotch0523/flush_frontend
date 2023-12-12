@@ -11,7 +11,7 @@ const config: ApiConfig = {
   b2cScopes: process.env.NEXT_PUBLIC_API_SCOPE ? [process.env.NEXT_PUBLIC_API_SCOPE] : [],
 }
 
-const useFetchWithMsal = <T,>(method: HttpMethod = 'POST', endpoint: string) => {
+const useFetchWithMsal = <T,>(method: HttpMethod = 'POST', path: string, contentType: string = 'application/json') => {
   const { accounts, instance } = useMsal()
   const [loading, setLoading] = useState(false)
   const [fetchError, setFetchError] = useState<any>(null)
@@ -46,18 +46,20 @@ const useFetchWithMsal = <T,>(method: HttpMethod = 'POST', endpoint: string) => 
 
       const headers = new Headers()
       const bearer = `Bearer ${accessTokenResponse.accessToken}`
+
       headers.append('Authorization', bearer)
       headers.append('x-user-id', account?.idTokenClaims?.sub ?? '')
-      headers.append('Content-Type', 'application/json')
+      headers.append('Content-Type', contentType)
 
       const options = {
         method,
         headers,
-        body: JSON.stringify(body),
+        body: contentType === 'application/json' ? JSON.stringify(body) : body,
       }
 
       setLoading(true)
-      const response = await fetch(process.env.NEXT_PUBLIC_API_ENDPOINT + endpoint, options)
+      const endpoint = path.startsWith('/api') ? path : process.env.NEXT_PUBLIC_API_ENDPOINT + path
+      const response = await fetch(endpoint, options)
       if (!response.ok) throw new Error(response.statusText)
       const result: T = await response.json()
 

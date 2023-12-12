@@ -63,7 +63,7 @@ const CreateCardPage = () => {
             label={t('card.form.thumbnail')}
             required={true}
             maxLength={1000}
-            domain='card'
+            domain='cards'
           />
           <InputField
             key={'question'}

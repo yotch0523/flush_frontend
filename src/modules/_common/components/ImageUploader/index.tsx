@@ -1,6 +1,10 @@
+import Image from 'next/image'
 import { ChangeEvent, useCallback } from 'react'
 import { useFormContext } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
+import { styled } from 'styled-components'
 import useFileUpload from '~/modules/_common//hooks/useFileUpload'
+import Loading from '~/modules/_common/components/Loading'
 import { Domain } from '~/modules/_common/types/domain'
 
 type Props = {
@@ -13,8 +17,9 @@ type Props = {
 }
 
 const ImageUploader = ({ domain, formPath, maxLength, readOnly, required }: Props) => {
-  const { blobPath, upload } = useFileUpload({ domain })
+  const { loading, fileName, blobPath, upload } = useFileUpload({ domain })
   const { register } = useFormContext()
+  const { t } = useTranslation()
 
   const onFileSelected = useCallback(async (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return
@@ -22,10 +27,14 @@ const ImageUploader = ({ domain, formPath, maxLength, readOnly, required }: Prop
     await upload(file)
   }, [])
 
-  // customize according to https://qiita.com/d0ne1s/items/dd0ffa707ffe051969d7
+  if (loading) {
+    return <Loading />
+  }
+
   return (
-    <label htmlFor={formPath}>
-      <input id={formPath} type={'file'} accept={'image/png, image/jpeg'} onChange={onFileSelected} />
+    <>
+      <StyledLabel htmlFor={formPath}>{t('common.form.file.label')}</StyledLabel>
+      <StyledInput id={formPath} type={'file'} accept={'image/*'} onChange={onFileSelected} />
       <input
         type={'hidden'}
         {...register(formPath)}
@@ -34,8 +43,24 @@ const ImageUploader = ({ domain, formPath, maxLength, readOnly, required }: Prop
         required={required}
         value={blobPath ?? ''}
       />
-    </label>
+      {blobPath ? <Image height={100} width={100} src={blobPath} alt={fileName ?? 'uploadedImage'} /> : null}
+    </>
   )
 }
+
+const StyledLabel = styled.label`
+  border: none;
+  border-radius: 6px;
+  padding: 10px 10px;
+  display: inline-block;
+  width: 160px;
+  ${({ theme }) => `color: ${theme.color.white};`}
+  ${({ theme }) => `background-color: ${theme.color.primary};`}
+  cursor: pointer;
+`
+
+const StyledInput = styled.input`
+  display: none;
+`
 
 export default ImageUploader

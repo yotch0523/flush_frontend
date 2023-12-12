@@ -11,13 +11,20 @@ type UploadImageResponse = {
   userId: string
   progress: number
   message: string
-  blobName: string
+  newFilename: string
+  originalFilename: string
 }
 
 const useFileUpload = ({ domain }: Props) => {
+  const [fileName, setFileName] = useState<string | null>(null)
   const [blobPath, setBlobPath] = useState<string | null>(null)
   const { t } = useTranslation()
-  const { data, msalFetch } = useFetchWithMsal<UploadImageResponse>('POST', `/api/${domain}/image`)
+
+  const { loading, data, msalFetch } = useFetchWithMsal<UploadImageResponse>(
+    'POST',
+    `/api/${domain}/image`,
+    'multipart/form-data',
+  )
 
   const upload = useCallback(async (file: File) => {
     const formData = new FormData()
@@ -32,10 +39,13 @@ const useFileUpload = ({ domain }: Props) => {
 
   useEffect(() => {
     if (!data || data.progress < 100) return
-    setBlobPath(`/${data.userId}/${domain}/${data.blobName}`)
+    setFileName(data.originalFilename)
+    setBlobPath(`/${data.userId}/${domain}/${data.newFilename}`)
   }, [data])
 
   return {
+    loading,
+    fileName,
     blobPath,
     upload,
   }

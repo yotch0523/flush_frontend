@@ -5,7 +5,7 @@
         "label": "register"
       },
       "file": {
-        "label": "file",
+        "label": "browse",
         "events": {
           "success": "succeeded to upload file",
           "error": "failed to upload file"
