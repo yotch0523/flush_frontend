@@ -6,6 +6,7 @@ import { InferType } from 'yup'
 import HomeLayout from '~/layouts/HomeLayout'
 import Button from '~/modules/_common/components/Button'
 import InputField from '~/modules/_common/components/InputField'
+import Loading from '~/modules/_common/components/Loading'
 import { theme } from '~/modules/_common/themes'
 import { useCard } from '~/modules/card/hooks/useCard'
 import { cardSchema } from '~/modules/card/schemas/cardSchema'
@@ -14,7 +15,7 @@ type CreateCardForm = InferType<typeof cardSchema>
 
 const CreateCardPage = () => {
   const { t } = useTranslation()
-  const { create, error } = useCard()
+  const { loading, create, error } = useCard()
   const formMethods = useForm<CreateCardForm>({
     defaultValues: {
       title: '',
@@ -35,6 +36,10 @@ const CreateCardPage = () => {
       tags: [],
     }
     await create(data)
+  }
+
+  if (loading) {
+    return <Loading />
   }
 
   return (
