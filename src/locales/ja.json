@@ -33,6 +33,10 @@
       "description": {
         "label": "説明"
       }
+    },
+    "events": {
+      "creationSucceed": "カードの作成に成功しました。",
+      "creationFailured": "カードの作成に失敗しました。"
     }
   }
 }

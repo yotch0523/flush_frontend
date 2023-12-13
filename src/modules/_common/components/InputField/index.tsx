@@ -100,9 +100,11 @@ const StyledContainer = styled.div`
 
 const StyledLabelContainer = styled.div`
   ${({ theme }) => `padding: 0 ${theme.form.container.padding};`}
+  display: flex;
   flex-basis: 0;
   flex-grow: 1;
-  text-align: right;
+  align-items: center;
+  justify-content: flex-end;
 `
 
 const StyledInputContainer = styled.div`

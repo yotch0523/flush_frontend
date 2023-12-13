@@ -33,6 +33,10 @@
       "description": {
         "label": "description"
       }
+    },
+    "events": {
+      "creationSucceed": "succeeded to create card",
+      "creationFailured": "failured to create card"
     }
   }
 }

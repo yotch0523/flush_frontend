@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
@@ -15,7 +16,8 @@ type CreateCardForm = InferType<typeof cardSchema>
 
 const CreateCardPage = () => {
   const { t } = useTranslation()
-  const { loading, create, error } = useCard()
+  const { loading, create, data: result, error } = useCard()
+  const [message, setMessage] = useState<string | null>(null)
   const formMethods = useForm<CreateCardForm>({
     defaultValues: {
       title: '',
@@ -28,7 +30,7 @@ const CreateCardPage = () => {
     resolver: yupResolver(cardSchema),
   })
 
-  const { handleSubmit } = formMethods
+  const { handleSubmit, reset } = formMethods
 
   const onSubmit = async (data) => {
     data = {
@@ -38,6 +40,19 @@ const CreateCardPage = () => {
     await create(data)
   }
 
+  useEffect(() => {
+    if (result?.id) {
+      reset()
+      setMessage(t('card.events.creationSucceed'))
+    }
+  }, [result])
+
+  useEffect(() => {
+    if (error) {
+      setMessage(t('card.events.creationFailured'))
+    }
+  }, [error])
+
   if (loading) {
     return <Loading />
   }
@@ -45,9 +60,9 @@ const CreateCardPage = () => {
   return (
     <HomeLayout>
       <h1>Card Create Page</h1>
-      {error ? (
+      {message ? (
         <>
-          <div>{error.message}</div>
+          <div>{message}</div>
         </>
       ) : null}
       <form onSubmit={handleSubmit(onSubmit)}>
