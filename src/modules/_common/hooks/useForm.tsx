@@ -14,12 +14,7 @@ type Prpos = {
 export const useForm = <T,>({ schema, controller, action, userId }: Prpos) => {
   type FormSchemaType = z.infer<typeof schema>
 
-  const {
-    loading: isLoading,
-    data,
-    fetchError,
-    msalFetch: execute,
-  } = useFetchWithMsal<T>('POST', `/${controller}/${action}`)
+  const { loading: isLoading, data, fetchError, msalFetch } = useFetchWithMsal<T>()
 
   const {
     register,
@@ -35,7 +30,7 @@ export const useForm = <T,>({ schema, controller, action, userId }: Prpos) => {
 
   const onSubmit = async (formData: FormSchemaType) => {
     try {
-      await execute(formData)
+      await msalFetch('POST', `/${controller}/${action}`, formData)
     } catch (error) {
       throw error
     }

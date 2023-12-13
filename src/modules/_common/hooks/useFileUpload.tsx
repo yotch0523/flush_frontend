@@ -20,18 +20,14 @@ const useFileUpload = ({ domain }: Props) => {
   const [blobPath, setBlobPath] = useState<string | null>(null)
   const { t } = useTranslation()
 
-  const { loading, data, msalFetch } = useFetchWithMsal<UploadImageResponse>(
-    'POST',
-    `/api/${domain}/image`,
-    'multipart/form-data',
-  )
+  const { loading, data, msalFetch } = useFetchWithMsal<UploadImageResponse>()
 
   const upload = useCallback(async (file: File) => {
     const formData = new FormData()
     formData.append('file', file)
 
     try {
-      await msalFetch(formData)
+      await msalFetch('POST', `/api/${domain}/image`, formData, '')
     } catch (error) {
       throw new Error(t('common.form.file.events.error'))
     }

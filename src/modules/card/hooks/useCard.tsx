@@ -5,12 +5,12 @@ type Response = {
 }
 
 export const useCard = () => {
-  const { loading, msalFetch, fetchError, data } = useFetchWithMsal<Response>('POST', '/cards/create')
+  const { loading, msalFetch, fetchError, data } = useFetchWithMsal<Response>()
 
   const create = async (body) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      await msalFetch(body)
+      await msalFetch('POST', '/cards/create', body)
     } catch (error) {
       console.info(error)
     }
