@@ -59,7 +59,7 @@ const CreateCardPage = () => {
 
   return (
     <HomeLayout>
-      <h1>Card Create Page</h1>
+      <h1>Card Create Page </h1>
       {message ? (
         <>
           <div>{message}</div>
