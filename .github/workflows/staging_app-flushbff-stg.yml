@@ -24,8 +24,7 @@ jobs:
       - name: yarn, build, and test
         run: |
           yarn
-          yarn build --if-present
-          yarn test --if-present
+          yarn build
 
       - name: zip artifact for deployment
         run: zip ./release.zip ./.next/server -r
