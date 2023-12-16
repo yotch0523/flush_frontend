@@ -2,9 +2,11 @@ import { useCallback } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { styled } from 'styled-components'
+import ImageUploader from '~/modules/_common/components/ImageUploader'
 import useFormError from '~/modules/_common/hooks/useFormError'
+import { Domain } from '~/modules/_common/types/domain'
 
-type InputType = 'text' | 'textarea' | 'tel' | 'password' | 'email'
+type InputType = 'text' | 'textarea' | 'tel' | 'password' | 'email' | 'image'
 
 type Props = {
   formPath: string
@@ -14,6 +16,7 @@ type Props = {
   required?: boolean
   helperText?: string
   maxLength?: number
+  domain?: Domain
 }
 
 const InputField = ({
@@ -24,6 +27,7 @@ const InputField = ({
   required = false,
   helperText = '',
   maxLength = 100,
+  domain,
 }: Props) => {
   const { register } = useFormContext()
   const { t } = useTranslation()
@@ -42,6 +46,17 @@ const InputField = ({
               required={required}
             />
           </>
+        )
+      case 'image':
+        if (!domain) return null
+        return (
+          <ImageUploader
+            domain={domain}
+            formPath={formPath}
+            maxLength={maxLength}
+            readOnly={readOnly}
+            required={required}
+          />
         )
       default:
         return (
@@ -85,9 +100,11 @@ const StyledContainer = styled.div`
 
 const StyledLabelContainer = styled.div`
   ${({ theme }) => `padding: 0 ${theme.form.container.padding};`}
+  display: flex;
   flex-basis: 0;
   flex-grow: 1;
-  text-align: right;
+  align-items: center;
+  justify-content: flex-end;
 `
 
 const StyledInputContainer = styled.div`
