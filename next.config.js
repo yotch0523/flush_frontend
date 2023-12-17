@@ -4,6 +4,7 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  output: 'standalone',
   images: {
     unoptimized: true,
   },
