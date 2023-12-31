@@ -28,7 +28,7 @@ export const parseMultipleNodeRequest = (
     }
     const form = formidable({
       multiples: true,
-      fileWriteStreamHandler: fileWriteStreamHandler,
+      fileWriteStreamHandler,
     })
     form.parse(req, (error, fields, files) => {
       if (error) {

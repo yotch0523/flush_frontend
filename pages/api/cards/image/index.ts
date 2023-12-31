@@ -16,25 +16,21 @@ const postHandler: NextApiHandler = async (req: NextApiRequest, res: NextApiResp
 
   if (contentType?.includes('multipart/form-data')) {
     const { files } = await parseMultipleNodeRequest(userId, 'card', req)
-    const { newFilename, originalFilename } = files
-
+    const { newFilename, originalFilename } = files.file ? files.file[0] : { newFilename: '', originalFilename: '' }
     res.status(200).send({
-      data: {
-        userId,
-        progress: 100,
-        message: 'Success',
-        newFilename,
-        originalFilename,
-      },
-    })
-  }
-  res.status(200).send({
-    data: {
       userId,
       progress: 100,
       message: 'Success',
-    },
-  })
+      newFilename,
+      originalFilename,
+    })
+  } else {
+    res.status(200).send({
+      userId,
+      progress: 100,
+      message: 'Success',
+    })
+  }
 }
 
 export default handler({

@@ -44,7 +44,6 @@ const useFetchWithMsal = <T,>() => {
       body: FormData | null,
       contentType: string = 'application/json',
     ) => {
-      console.info('contentType :', contentType)
       try {
         await instance.initialize()
         const accessTokenResponse = await instance.acquireTokenSilent(tokenRequest)
