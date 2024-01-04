@@ -22,9 +22,16 @@ const Sidebar = ({ backgroundColor, color }: Props) => {
 
   if (isActive) {
     return (
-      <Nav backgroundColor={backgroundColor}>
-        <Links backgroundColor={backgroundColor} color={color} />
-      </Nav>
+      <>
+        <Nav backgroundColor={backgroundColor}>
+          <Links backgroundColor={backgroundColor} color={color} />
+        </Nav>
+        <StyledOverlay
+          onClick={() => {
+            dispatches[AppContextType.IsSidebarVisible]?.(() => false)
+          }}
+        />
+      </>
     )
   } else {
     return null
@@ -42,6 +49,20 @@ const Nav = styled.nav<{ backgroundColor?: string }>`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1;
+`
+
+const StyledOverlay = styled.div`
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
 `
 
 export default Sidebar

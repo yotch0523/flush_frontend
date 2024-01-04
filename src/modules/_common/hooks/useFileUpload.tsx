@@ -36,7 +36,7 @@ const useFileUpload = ({ domain }: Props) => {
   useEffect(() => {
     if (!data || data.progress < 100) return
     setFileName(data.originalFilename)
-    setBlobPath(`/${data.userId}/${domain}/${data.newFilename}`)
+    setBlobPath(`${process.env.NEXT_PUBLIC_STORAGE_DOMAIN}/user-images/${data.userId}/${domain}/${data.newFilename}`)
   }, [data])
 
   return {

@@ -54,7 +54,7 @@ const CreateCardPage = () => {
   }, [error])
 
   if (loading) {
-    return <Loading />
+    return <Loading message='Uploading...' />
   }
 
   return (
