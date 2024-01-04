@@ -21,7 +21,7 @@ const postHandler: NextApiHandler = async (req: NextApiRequest, res: NextApiResp
       req,
     })
     const { newFilename, originalFilename } = files.file ? files.file[0] : { newFilename: '', originalFilename: '' }
-    res.status(200).send({
+    return res.status(200).send({
       userId,
       progress: 100,
       message: 'Success',
@@ -29,7 +29,7 @@ const postHandler: NextApiHandler = async (req: NextApiRequest, res: NextApiResp
       originalFilename,
     })
   } else {
-    res.status(200).send({
+    return res.status(200).send({
       userId,
       progress: 100,
       message: 'Success',
