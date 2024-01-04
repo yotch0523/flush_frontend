@@ -1,5 +1,5 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
-import { parseMultipleNodeRequest } from '~/modules/api/_common/services/imageParser'
+import { storageService } from '~/modules/api/_common/services/storage'
 import { handler } from '~/modules/api/cards/handler'
 
 export const config = {
@@ -15,7 +15,11 @@ const postHandler: NextApiHandler = async (req: NextApiRequest, res: NextApiResp
   const contentType = req.headers instanceof Headers ? req.headers.get('content-type') : req.headers['content-type']
 
   if (contentType?.includes('multipart/form-data')) {
-    const { files } = await parseMultipleNodeRequest(userId, 'card', req)
+    const { files } = await storageService.upload({
+      userId,
+      domain: 'card',
+      req,
+    })
     const { newFilename, originalFilename } = files.file ? files.file[0] : { newFilename: '', originalFilename: '' }
     res.status(200).send({
       userId,
