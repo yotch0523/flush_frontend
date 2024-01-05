@@ -10,9 +10,9 @@ export const useCard = () => {
   const create = async (body) => {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      await msalFetch('POST', '/cards/create', body)
+      await msalFetch('POST', '/api/cards/create', body)
     } catch (error) {
-      console.info(error)
+      console.error(error)
     }
   }
 

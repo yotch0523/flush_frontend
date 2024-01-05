@@ -11,7 +11,7 @@ const CardListPage = () => {
 
   useEffect(() => {
     void (async () => {
-      await msalFetch('POST', '/cards', null)
+      await msalFetch('POST', '/api/cards', null)
     })()
   }, [])
 
