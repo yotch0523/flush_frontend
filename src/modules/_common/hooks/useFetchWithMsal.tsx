@@ -64,7 +64,7 @@ const useFetchWithMsal = <T,>() => {
         }
 
         setLoading(true)
-        const endpoint = path.startsWith('/api') ? path : process.env.NEXT_PUBLIC_API_ENDPOINT + path
+        const endpoint = path
         const response = await fetch(endpoint, options)
         if (!response.ok) throw new Error(response.statusText)
         const result: T = await response.json()
