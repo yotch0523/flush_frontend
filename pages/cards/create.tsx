@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
@@ -6,6 +7,7 @@ import { InferType } from 'yup'
 import HomeLayout from '~/layouts/HomeLayout'
 import Button from '~/modules/_common/components/Button'
 import InputField from '~/modules/_common/components/InputField'
+import Loading from '~/modules/_common/components/Loading'
 import { theme } from '~/modules/_common/themes'
 import { useCard } from '~/modules/card/hooks/useCard'
 import { cardSchema } from '~/modules/card/schemas/cardSchema'
@@ -14,7 +16,8 @@ type CreateCardForm = InferType<typeof cardSchema>
 
 const CreateCardPage = () => {
   const { t } = useTranslation()
-  const { create, error } = useCard()
+  const { loading, create, data: result, error } = useCard()
+  const [message, setMessage] = useState<string | null>(null)
   const formMethods = useForm<CreateCardForm>({
     defaultValues: {
       title: '',
@@ -27,7 +30,7 @@ const CreateCardPage = () => {
     resolver: yupResolver(cardSchema),
   })
 
-  const { handleSubmit } = formMethods
+  const { handleSubmit, reset } = formMethods
 
   const onSubmit = async (data) => {
     data = {
@@ -37,12 +40,29 @@ const CreateCardPage = () => {
     await create(data)
   }
 
+  useEffect(() => {
+    if (result?.id) {
+      reset()
+      setMessage(t('card.events.creationSucceed'))
+    }
+  }, [result])
+
+  useEffect(() => {
+    if (error) {
+      setMessage(t('card.events.creationFailured'))
+    }
+  }, [error])
+
+  if (loading) {
+    return <Loading message='Uploading...' />
+  }
+
   return (
     <HomeLayout>
       <h1>Card Create Page</h1>
-      {error ? (
+      {message ? (
         <>
-          <div>{error.message}</div>
+          <div>{message}</div>
         </>
       ) : null}
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -54,14 +74,16 @@ const CreateCardPage = () => {
             formPath={'cardCode'}
             label={t('card.form.cardCode')}
             required={true}
-            maxLength={1000}
+            maxLength={30}
           />
           <InputField
             key={'thumbnail'}
+            type={'image'}
             formPath={'thumbnail'}
             label={t('card.form.thumbnail')}
             required={true}
-            maxLength={30}
+            maxLength={1000}
+            domain='cards'
           />
           <InputField
             key={'question'}

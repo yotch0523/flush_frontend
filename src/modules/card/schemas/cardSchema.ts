@@ -6,6 +6,6 @@ export const cardSchema = object().shape({
   question: string().max(100).required(),
   answer: string().max(100).required(),
   // tags: string[]
-  thumbnail: string().url().max(1000),
+  thumbnail: string().max(1000),
   description: string().max(1000),
 })

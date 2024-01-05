@@ -10,7 +10,7 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "lib": ["dom", "es2015", "es2016", "es2017", "es2019"],
+    "lib": ["dom", "es2015", "es2016", "es2017", "es2019", "ES2022"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -30,7 +30,7 @@
     "strictPropertyInitialization": false,
     "strict": true,
     "noImplicitAny": false,
-    "target": "ES2019",
+    "target": "ES2022",
     "typeRoots": ["./node_modules/@types"],
     "incremental": true
   },

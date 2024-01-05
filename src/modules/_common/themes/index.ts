@@ -12,6 +12,7 @@ export const theme = {
   },
   color: {
     white: '#fff',
+    primary: '	#007bff',
   },
   media: {
     sm: '@media (min-width: 640px)',

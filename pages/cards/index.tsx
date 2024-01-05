@@ -7,11 +7,11 @@ import { ICard } from '~/modules/card/models/card'
 
 const CardListPage = () => {
   const [cards, setCards] = useState<ICard[]>([])
-  const { loading: isLoading, data, fetchError: error, msalFetch } = useFetchWithMsal<ICard[]>('POST', '/cards')
+  const { loading: isLoading, data, fetchError: error, msalFetch } = useFetchWithMsal<ICard[]>()
 
   useEffect(() => {
     void (async () => {
-      await msalFetch()
+      await msalFetch('POST', '/api/cards', null)
     })()
   }, [])
 
