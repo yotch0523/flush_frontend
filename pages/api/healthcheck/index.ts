@@ -1,5 +1,5 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
-import { handler } from '~/modules/api/cards/handler'
+import { handler } from '~/modules/api/handler'
 
 const getHandler: NextApiHandler = (_: NextApiRequest, res: NextApiResponse) => {
   return res.status(200).send({
