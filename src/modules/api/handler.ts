@@ -1,15 +1,13 @@
-import appInsights, { defaultClient } from 'applicationinsights'
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import { HTTP_METHOD, isHTTPMethod } from 'next/dist/server/web/http'
 import { errorHandler } from '~/modules/api/cards/errorHandler'
+import { appInsightsClient } from './_common/services/appInsights'
 
 export type Handlers = {
   [key in HTTP_METHOD]?: NextApiHandler
 }
 
 export const handler = (handlers: Handlers) => {
-  appInsights.setup(process.env.APPLICATIONINSIGHTS_CONNECTION_STRING).start()
-  appInsights.defaultClient.context.tags[appInsights.defaultClient.context.keys.cloudRole] = 'flush-app'
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const { method } = req
     if (!method || !isHTTPMethod(method)) {
@@ -21,7 +19,6 @@ export const handler = (handlers: Handlers) => {
       })
     }
     const handler = handlers[method]
-
     if (!handler) {
       return res.status(405).json({
         error: {
@@ -31,29 +28,46 @@ export const handler = (handlers: Handlers) => {
       })
     }
 
+    const userId = req.headers['x-user-id'] as string
+    if (!userId) {
+      return res.status(401).json({
+        error: {
+          message: 'Unauthorized request',
+          statusCode: 401,
+        },
+      })
+    }
+
     try {
       await handler(req, res)
     } catch (error) {
       if (error instanceof Error) {
         const exception = new Error(error.message, { cause: error })
-        defaultClient.trackException({
+        appInsightsClient.trackException({
           exception,
         })
-        errorHandler(error, res)
+      } else {
+        appInsightsClient.trackException({
+          exception: new Error('Inetrnal server error', { cause: error }),
+        })
       }
-
-      const exception = new HttpException(
-        {
-          status: HttpStatus.INTERNAL_SERVER_ERROR,
-          error: JSON.stringify(error),
-        },
-        HttpStatus.INTERNAL_SERVER_ERROR,
-        { cause: error },
-      )
-      defaultClient.trackException({
-        exception,
-      })
       errorHandler(error, res)
     }
   }
+}
+
+export const customFetch = async (method: HTTP_METHOD = 'POST', endpoint: string, req: NextApiRequest) => {
+  const userId = req.headers['x-user-id'] as string
+  const headers = new Headers()
+  headers.append('x-user-id', userId)
+  const options = {
+    method,
+    headers,
+    body: req.body,
+  }
+  const response = await fetch(process.env.API_ENDPOINT + endpoint, options)
+  if (!response.ok) {
+    throw new Error(response.statusText)
+  }
+  return await response.json()
 }

@@ -1,6 +1,6 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import { storageService } from '~/modules/api/_common/services/storage'
-import { handler } from '~/modules/api/cards/handler'
+import { handler } from '~/modules/api/handler'
 
 export const config = {
   api: {
